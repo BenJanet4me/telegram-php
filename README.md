@@ -14,6 +14,7 @@ PHP telegram bot simple.
 1. tupobot - exaple php webhook script sendMessage example
 2. bot debuger - php bot script to show json 
 3. net4mebot - real bot http://t.me/net4mebot example of inline keyboard, case, replyMarkup, answerCallbackQuery, sendMessage, editMessageText
+4. inline - php bot script to show json + inline keyboard
 
 
 ### site (russian)
