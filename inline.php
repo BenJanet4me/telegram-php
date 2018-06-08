@@ -14,10 +14,12 @@ $callback_query = $output['callback_query'];
 $data = $callback_query['data'];
 $chat_id_in = $callback_query['message']['chat']['id'];
 $message_id = $callback_query['message']['message_id'];
-$inline_button5 = array("inline_message_id"=>"5","text"=>"show all","callback_data"=>'/1');
-$inline_button6 = array("inline_message_id"=>"6","text"=>"show callback","callback_data"=>'/2');
-$inline_keyboard1 = [[$inline_button5,$inline_button6]];
+// inline keyboard set:
+$inline_button3 = array("inline_message_id"=>"3","text"=>"show all","callback_data"=>'/1');
+$inline_button4 = array("inline_message_id"=>"4","text"=>"show callback","callback_data"=>'/2');
+$inline_keyboard1 = [[$inline_button3,$inline_button4]];
 $keyboard1=array("inline_keyboard"=>$inline_keyboard1);
+// do markup with inline keyboard:
 $replyMarkup1 = json_encode($keyboard1);
 switch($message) {
     case '/start':
@@ -25,7 +27,7 @@ switch($message) {
     break;
     default:
     $myDebug = "<pre>". json_encode($output) ."</pre>";
-    sendKeyboard($chat_id, $myDebug, $replyMarkup1);
+    sendKeyboard($chat_id, $myDebug, $replyMarkup1); //send message with inline keyboard
     break;
 }
 // callback data
