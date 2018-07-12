@@ -30,20 +30,33 @@ switch($message) {
 }
 // callback data
 switch($data){
-    case '/1':
-    $myDebug = "<pre>". json_encode($output) ."</pre>";
+case '/1':
+	// чтоб не крутились часы, посылаем пустой ответ при нажатии на кнопку.
+	// for delete "clock" on keyboard button - send null callback query answer:
+	send_answerCallbackQuery($callback_query[id], null, false);
+	$myDebug = "<pre>". json_encode($output) ."</pre>";
   	sendKeyboard($chat_id_in, $myDebug);
     break;
-    case '/2':
+	case '/2':
+	send_answerCallbackQuery($callback_query[id],'callback id: ' . $callback_query[id],true);
     $myDebug = "<pre>". json_encode($output) ."</pre>";
   	sendKeyboard($chat_id_in, $myDebug);
     break;
 }
 
+// Вместо универсальной функции, для наглядности используем различные функции отправки сообщений.
+// Посылаем сообщение (send only message)
 function sendMessage($chat_id, $message) {
   file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message) . '&parse_mode=html');
 }
 
+// Посылаем сообщение с клавиатурой (send message with inline keyboard in reply markup)
 function sendKeyboard($chat_id, $message, $replyMarkup) {
   file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message) . '&parse_mode=html&reply_markup=' . $replyMarkup);
 }
+
+// Посылае ответ на нажатие кнопок (send callback query answer):
+function send_answerCallbackQuery($callback_query_id, $text, $show_alert){
+  file_get_contents($GLOBALS['api'] . '/answerCallbackQuery?callback_query_id=' . $callback_query_id . '&text=' . $text . '&show_alert=' . $show_alert );
+}
+
