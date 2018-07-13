@@ -5,7 +5,7 @@ PHP telegram bot simple.
 ### Create bot 
 
 1. @BotFather - register new bot + bot token
-2. find hosting with SSL
+2. find hosting with SSL (out of Russia)
 3. copy any php bot script, edit bot token, place script on your hosting (with SSL).
 4. set webHook to script: https://api.telegram.org/botXXXX:XXXXXXXXXXX/setWebhook?url=https://MY.SITE.COM/bot/MYTUPOBOT.php (change uppercased)
 5. use it!
@@ -21,7 +21,5 @@ PHP telegram bot simple.
 ### site (russian)
 
 http://www.net4me.net/php/telegram-bot-php/
-
-### Authors
 
 
