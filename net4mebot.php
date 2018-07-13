@@ -92,6 +92,7 @@ switch($message) {
 // callback_query commands!
 switch($data){
   case '/menu':
+	send_answerCallbackQuery($callback_query[id], null, false);
     $mess = "\xF0\x9F\x93\xA1 <b>NET4ME</b>.
   Open Source Portal
 <i>Технологии в простых примерах.</i>
@@ -103,7 +104,8 @@ switch($data){
     editMessageText($chat_id_in, $message_id, $mess, $replyMarkup1);
   break;
   case '/linux':
-    $mess = "\xF0\x9F\x90\xA7 <b>OS linux</b>
+	send_answerCallbackQuery($callback_query[id], null, false);
+	$mess = "\xF0\x9F\x90\xA7 <b>OS linux</b>
 Конечно, мир без linux был бы другим.
 Open Source это наше всё.
 
@@ -115,6 +117,7 @@ Open Source это наше всё.
     editMessageText($chat_id_in, $message_id, $mess, $replyMarkup2);
   break;
   case '/bash':
+	send_answerCallbackQuery($callback_query[id], null, false);
     $mess = "\xF0\x9F\x92\xBB <b>BASH</b>
 BASH это Unix shell (в общем, командная строка, оболочка) переводится как Bourne-again shell.
 Используется в очень многих Unix-like системах как оболочка по умолчанию.
@@ -124,6 +127,7 @@ Linux, Mac OS X, FreeBSD, *BSD и т.д. даже под винду есть.
     editMessageText($chat_id_in, $message_id, $mess, $replyMarkup3);
   break;
   case '/network':
+	send_answerCallbackQuery($callback_query[id], null, false);
     $mess = "\xF0\x9F\x8C\x8D <b>Компьютерные сети.</b>
 Сейчас передача данных по сети - норма окружающего нас мира.
 Но как это работает?
@@ -132,6 +136,7 @@ Linux, Mac OS X, FreeBSD, *BSD и т.д. даже под винду есть.
     editMessageText($chat_id_in, $message_id, $mess, $replyMarkup4);
   break;
   case '/telegram':
+	send_answerCallbackQuery($callback_query[id], null, false);
     $mess = "\xF0\x9F\x92\xBC <b>telegram bot</b>
 Пусть боты будут простыми.
 Собственные сервера с интерпретаторами, сертификатами, сложные громоздкие билиотеки, SDK, фреймвворки... 
@@ -143,10 +148,12 @@ Linux, Mac OS X, FreeBSD, *BSD и т.д. даже под винду есть.
     editMessageText($chat_id_in, $message_id, $mess, $replyMarkup5);
   break;
   case '/links':
+	send_answerCallbackQuery($callback_query[id], null, false);
     $mess = "\xF0\x9F\x93\x9A <b>Links</b>";
     editMessageText($chat_id_in, $message_id, $mess, $replyMarkup6);
   break;
   case '/donate':
+	send_answerCallbackQuery($callback_query[id], null, false);
     $mess = "\xF0\x9F\x92\xB3 <b>Помочь и поддержать www.net4me.net</b>
 Очень нужна ваша помощь. \xE2\x9B\xBD
 Конечно, всё что мы делаем - <b>абсолютно бесплатно</b>.
@@ -161,6 +168,7 @@ http://yasobe.ru/na/net4me
     editMessageText($chat_id_in, $message_id, $mess, $replyMarkup7);
   break;
   case '/exit':
+	send_answerCallbackQuery($callback_query[id], null, false);
     $mess = "\xF0\x9F\x9A\xAA\xF0\x9F\x9A\xB6 <b>Выход</b>
 Спасибо что посетили нас.
 Надеемся, что были вам полезны. 
@@ -169,15 +177,6 @@ http://yasobe.ru/na/net4me
 
 Оставайтесь с нами";
     editMessageText($chat_id_in, $message_id, $mess, $replyMarkup8);
-  break;
-  case '/debug':
-  answerCallbackQuery($query_id, "Alert через
-answerCallbackQuery
-по query_id.
-Данные:
- chat_id = ".$chat_id_in."
- msg_id = ".$message_id."
- data = ".$data );
   break;
 }
 
@@ -190,8 +189,9 @@ function sendKeyboard($chat_id, $message, $replyMarkup) {
   file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message) . '&parse_mode=html&reply_markup=' . $replyMarkup);
 }
 
-function answerCallbackQuery($query_id, $message) {
-  file_get_contents($GLOBALS['api'] . '/answerCallbackQuery?callback_query_id=' . $query_id . '&text=' . urlencode($message) . '&show_alert=true');
+// Ответ на нажатие кнопок
+function send_answerCallbackQuery($callback_query_id, $text, $show_alert){
+  file_get_contents($GLOBALS['api'] . '/answerCallbackQuery?callback_query_id=' . $callback_query_id . '&text=' . $text . '&show_alert=' . $show_alert );
 }
 
 // END
