@@ -67,8 +67,8 @@ $keyboard8 = array("inline_keyboard"=>$inline_keyboard8); $replyMarkup8 = json_e
 // обработка поступающего
 //commands
 switch($message) {
-    case '/start':
-  $mess = "\xF0\x9F\x93\xA1 <b>NET4ME</b>.
+  case '/start':
+    $mess = "\xF0\x9F\x93\xA1 <b>NET4ME</b>.
   Open Source Portal
 <i>Технологии в простых примерах.</i>
 Новые, современные технологии часто создают ауру \"это только для избраных\".
@@ -82,17 +82,17 @@ switch($message) {
   break;
   case 'Hi':
   case 'Hello':
-   sendKeyboard($chat_id, "Hello!");
+    sendKeyboard($chat_id, "Hello!");
   break;
   case 'Привет':
   case 'Хаюшки':
-   sendKeyboard($chat_id, "Здарова!");
+    sendKeyboard($chat_id, "Здарова!");
   break;
 }
 // callback_query commands!
 switch($data){
   case '/menu':
-	send_answerCallbackQuery($callback_query[id], null, false);
+ 	send_answerCallbackQuery($callback_query[id], null, false);
     $mess = "\xF0\x9F\x93\xA1 <b>NET4ME</b>.
   Open Source Portal
 <i>Технологии в простых примерах.</i>
@@ -180,7 +180,7 @@ http://yasobe.ru/na/net4me
   break;
 }
 
-
+// send functions:
 function editMessageText($chid, $mid, $mes, $repl) {
   file_get_contents($GLOBALS['api'] . '/editMessageText?chat_id='.$chid.'&message_id='.$mid.'&text='.urlencode($mes).'&parse_mode=html&reply_markup='.$repl );
 }
