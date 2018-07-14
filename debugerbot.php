@@ -12,12 +12,12 @@ $chat_id = $output['message']['chat']['id'];
 $message = $output['message']['text'];
 
 switch($message) {
-    case '/start':
+  case '/start':
     sendMessage($chat_id, "\xF0\x9F\x93\xA1 бот debugger на связи!");
-    break;
-    default:
+  break;
+  default:
     $myDebug = "<pre>". json_encode($output) ."</pre>"; sendMessage($chat_id, $myDebug);
-    break;
+  break;
 }
 
 function sendMessage($chat_id, $message) {
