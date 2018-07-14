@@ -20,8 +20,8 @@ $inline_button3 = array("inline_message_id"=>"3","text"=>"show all","callback_da
 $inline_button4 = array("inline_message_id"=>"4","text"=>"show callback","callback_data"=>'/2');
 $inline_keyboard1 = [[$inline_button3,$inline_button4]];
 $keyboard1=array("inline_keyboard"=>$inline_keyboard1);
-// do markup with inline keyboard:
 
+// do markup with inline keyboard:
 $replyMarkup1 = json_encode($keyboard1);
 switch($message) {
     case '/start':
