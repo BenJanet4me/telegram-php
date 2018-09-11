@@ -1,5 +1,5 @@
 <?php
-// 4eburashk для примера лечебных тестов.
+// 4eburashk для примера тестов.
 $access_token = 'XXXXXXX:XXXXXXXXXXXXXXXXXXXXXX';
 $api = 'https://api.telegram.org/bot' . $access_token;
 // query:
@@ -15,6 +15,7 @@ $query_id = $callback_query['id'];
 //
 // Общие кнопки, клавы и ответы лучше расположить здесь, чтоб были доступны в любом кейсе.
 // Можно описать кнопки, клавы и ответы в каждом кейсе отдельно, а можно описать всё и сразу и вызывать нужную клаву.
+// Для наглядности, покажу оба варианта.
 $inline_keyboard0 = [[]];
 $keyboard0 = array("inline_keyboard"=>$inline_keyboard0); $replyMarkup0 = json_encode($keyboard0);
 
@@ -32,32 +33,31 @@ $keyboard1 = array("inline_keyboard"=>$inline_keyboard1); $replyMarkup1 = json_e
 //commands
 switch($message) {
   case '/start':
-    $mess = "
-  Пример бота с тестами
+    $mess = "  Пример бота с тестами
   Например, будем лечить больного.
   Приступим?
   
   К вам пришел пациент и жалуется на боль в руке.
 
   Как вы поступите?";
-// отправляем сообщение и ответ с готовой клавиатурой в функцию отправки:
+	// отправляем сообщение и ответ с готовой клавиатурой в функцию отправки:
     sendKeyboard($chat_id, $mess, $replyMarkup1);
   break;
 }
+
 // ловим калбэк.
 switch($data){
   case '/3':
+	// чтобы бесконечно не крутились часы на кнопках в ожидании ответа, сразу отправляем пустой ответ:
  	send_answerCallbackQuery($callback_query[id], null, false);
-    $mess = "
-    Вы оторвали руку человеку!
+    $mess = "  Вы оторвали руку человеку!
     Ай-ай!
     Теперь же её надо приделать обратно.";
     editMessageText($chat_id_in, $message_id, $mess, $replyMarkup1);
   break;
   case '/4':
 	send_answerCallbackQuery($callback_query[id], null, false);
-	$mess = "
-  АААА!
+	$mess = "  АААА!
   Нога то тут вообще при чём?!
   Он же на руку жаловался.
 ";
@@ -65,8 +65,7 @@ switch($data){
   break;
   case '/5':
 	send_answerCallbackQuery($callback_query[id], null, false);
-    $mess = "
-    Да.
+    $mess = "  Да.
     Лучше уж порыдать вместе, чем руки ноги отрывать.
     Не самое профессиональное решение,
     зато хоть не навредили. 
@@ -75,20 +74,22 @@ switch($data){
   break;
   case '/6':
 	send_answerCallbackQuery($callback_query[id], null, false);
-    $mess = "
-    Хрррр...
+    $mess = "  Хрррр...
     Фуф, уснул.
     Помощи не просит, не беспокоит.
     Как бы его теперь отсюда вытащить?
 ";
-    editMessageText($chat_id_in, $message_id, $mess, $replyMarkup1);
-  break;
-  // всё таки предположим, что у нас будет меню и прощание:
-  case '/menu':
-	send_answerCallbackQuery($callback_query[id], null, false);
-    $mess = "Меню. Которое наврядли будет в этом примере.
-";
-    editMessageText($chat_id_in, $message_id, $mess, $replyMarkup0);
+    // пример инлайн клавиатуры внутри кейса:
+    // Создаём кнопки:
+    $inline_button7=array("inline_message_id"=>"7","text"=>"Ждать когда проснется","callback_data"=>'/exit');
+    $inline_button8=array("inline_message_id"=>"8","text"=>"Оторвать руку пока спит","callback_data"=>'/exit');
+    $inline_button9=array("inline_message_id"=>"9","text"=>"Выволочь спящее тело","callback_data"=>'/exit');
+    $inline_button10=array("inline_message_id"=>"10","text"=>"Звонок другу","callback_data"=>'/exit');
+    // из кнопок строим клаву:
+    $inline_keyboard2 = [[$inline_button7],[$inline_button8],[$inline_button9],[$inline_button10]];
+    // создаём ответ с клавиатурой:
+    $keyboard2 = array("inline_keyboard"=>$inline_keyboard2); $replyMarkup2 = json_encode($keyboard2);
+    editMessageText($chat_id_in, $message_id, $mess, $replyMarkup2);
   break;
   case '/exit':
 	send_answerCallbackQuery($callback_query[id], null, false);
@@ -96,7 +97,7 @@ switch($data){
     Спасибо что посетили наш госпиталь.
     Надеемся, что были вам полезны. 
 
-            \xF0\x9F\x99\x8F
+			\xF0\x9F\x99\x8F
 
     Покупайте наших слонов!";
     editMessageText($chat_id_in, $message_id, $mess, $replyMarkup0);
