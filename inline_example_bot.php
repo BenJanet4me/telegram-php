@@ -1,5 +1,7 @@
 <?php
 // 4eburashk для примера тестов.
+// Задача: Показать примериспользования инлайн клавиатур 
+// в основе примера - шутливый врачебный тест. 
 $access_token = 'XXXXXXX:XXXXXXXXXXXXXXXXXXXXXX';
 $api = 'https://api.telegram.org/bot' . $access_token;
 // query:
