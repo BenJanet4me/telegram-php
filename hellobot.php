@@ -5,8 +5,8 @@ $api = 'https://api.telegram.org/bot' . $access_token;
 $output = json_decode(file_get_contents('php://input'), TRUE);
 
 // for message:
-$chat_id = $output['message']['chat']['id'];
-$message = $output['message']['text'];
+@$chat_id = $output['message']['chat']['id'];
+@$message = $output['message']['text'];
 // for inline keyboard:
 $inline_button1 = array("inline_message_id"=>"1","text"=>"Cyber Security News","url"=>'http://csn.net4me.net');
 $inline_button2 = array("inline_message_id"=>"2","text"=>"Simple PHP Telegram Bots","url"=>'http://www.net4me.net/php/telegram-bot-php/');
