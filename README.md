@@ -12,11 +12,11 @@
 
 ### Set of examples of php bots
 
-1. hellobot.php - hello world
-2. tupobot.php - exaple php webhook script sendMessage example
-3. debugerbot.php - php bot script to show json 
-4. net4mebot.php - real bot http://t.me/net4mebot example of inline keyboard, case, replyMarkup, answerCallbackQuery, sendMessage, editMessageText
-5. inline.php - php bot script for show json "as is" + inline keyboard with callback query answer
+1. **hellobot.php** - hello world
+2. **tupobot.php** - exaple php webhook script sendMessage example
+3. **debugerbot.php** - php bot script to show json 
+4. **net4mebot.php** - real bot http://t.me/net4mebot example of inline keyboard, case, replyMarkup, answerCallbackQuery, sendMessage, editMessageText
+5. **inline.php** - php bot script for show json "as is" + inline keyboard with callback query answer
 
 
 ### site (russian)
