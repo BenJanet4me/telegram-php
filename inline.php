@@ -8,12 +8,12 @@ $api = 'https://api.telegram.org/bot' . $access_token;
  * Задаём основные переменные.
  */
 $output = json_decode(file_get_contents('php://input'), TRUE);
-$chat_id = $output['message']['chat']['id'];
-$message = $output['message']['text'];
-$callback_query = $output['callback_query'];
-$data = $callback_query['data'];
-$chat_id_in = $callback_query['message']['chat']['id'];
-$message_id = $callback_query['message']['message_id'];
+@$chat_id = $output['message']['chat']['id'];
+@$message = $output['message']['text'];
+@$callback_query = $output['callback_query'];
+@$data = $callback_query['data'];
+@$chat_id_in = $callback_query['message']['chat']['id'];
+@$message_id = $callback_query['message']['message_id'];
 
 // inline keyboard set:
 $inline_button3 = array("inline_message_id"=>"3","text"=>"show all","callback_data"=>'/1');
@@ -37,12 +37,12 @@ switch($data){
 	case '/1':
 		// чтоб не крутились часы, посылаем пустой ответ при нажатии на кнопку.
 		// for delete "clock" on keyboard button - send null callback query answer:
-		send_answerCallbackQuery($callback_query[id], null, false);
+		send_answerCallbackQuery($callback_query['id'], null, false);
 		$myDebug = "<pre>". json_encode($output) ."</pre>";
 		sendKeyboard($chat_id_in, $myDebug);
     break;
 	case '/2':
-		send_answerCallbackQuery($callback_query[id],'callback id: ' . $callback_query[id],true);
+		send_answerCallbackQuery($callback_query['id'],'callback id: ' . $callback_query['id'],true);
 		$myDebug = "<pre>". json_encode($output) ."</pre>";
 		sendKeyboard($chat_id_in, $myDebug);
     break;
